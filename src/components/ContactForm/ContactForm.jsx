@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import cl from './contactForm.module.css';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 
 class ContactForm extends Component {
   state = {
@@ -25,8 +26,8 @@ class ContactForm extends Component {
   render() {
     return (
       <form className={cl.form} onSubmit={this.handleSubmitForm}>
-        <label htmlFor="">
-          Name{' '}
+        <label className={cl.inputItem}>
+          Name <br />
           <input
             type="text"
             name="name"
@@ -38,8 +39,9 @@ class ContactForm extends Component {
             required
           />
         </label>
-        <label htmlFor="">
-          Number{' '}
+        <label className={cl.inputItem}>
+          Number
+          <br />
           <input
             type="tel"
             name="number"
@@ -47,13 +49,20 @@ class ContactForm extends Component {
             onChange={this.handleChange}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            placeholder="123-45-67"
             required
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button type="submit" className={cl.btn}>
+          Add contact
+        </button>
       </form>
     );
   }
 }
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default ContactForm;
